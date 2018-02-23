@@ -41,3 +41,6 @@ function renderShoppingList() {
     handleItemCheckClicked();
     handleDeleteItemClicked();
   }
+
+  // when the page loads, call `handleShoppingList`
+$(handleShoppingList);
