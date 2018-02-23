@@ -1,3 +1,10 @@
+const STORE = [
+    {name: "apples", checked: false},
+    {name: "oranges", checked: false},
+    {name: "milk", checked: true},
+    {name: "bread", checked: false}
+  ];
+  
 function renderShoppingList() {
     // this function will be repsonsible for rendering the shopping list in
     // the DOM
