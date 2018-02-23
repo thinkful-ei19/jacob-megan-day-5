@@ -57,34 +57,39 @@ function handleNewItemSubmit() {
 
 
 function toggleCheckedForListItem (itemIndex){
-  console.log ('Toggling checked property for item at ' + itemIndex);
+  console.log('Toggling checked property for item at ' + itemIndex);
   STORE[itemIndex].checked = !STORE[itemIndex].checked;
 }
   
 
 function getItemIndexFromElement (item){
-  const itemIndexString = $(item).closest('js-item-index-element').attr('data-item-index');
+  const itemIndexString = $(item).closest('.js-item-index-element').attr('data-item-index');
   return parseInt(itemIndexString, 10);
 }
   
 function handleItemCheckClicked() {
   // this funciton will be reponsible for when users click the "check" button on
   // a shopping list item.
-  $('.js-shopping-list').on('click','.js-item-toggle', event => 
-    console.log('handleItemCheckClicked ran')
+  $('.js-shopping-list').on('click',`.js-item-toggle`, event => {
     const itemIndex = getItemIndexFromElement(event.currentTarget);
     toggleCheckedForListItem(itemIndex);
-    renderShoppingList();  
-  );
+    renderShoppingList();
+  });
 
 }
 
-  
+function deleteClickedForListItem (itemIndex){
+    STORE.splice(itemIndex, 1);
+}
   
 function handleDeleteItemClicked() {
-  // this function will be responsible for when users want to delete a shopping list
-  // item
-  console.log('`handleDeleteItemClicked` ran');
+    $('.js-shopping-list').on('click','.js-item-delete', event => {
+        const itemIndex = getItemIndexFromElement(event.currentTarget);
+        deleteClickedForListItem(itemIndex);
+        renderShoppingList();
+    });
+//   renderShoppingList();
+//   console.log('`handleDeleteItemClicked` ran');
 }
   
 // this function will be our callback when the page loads. it's responsible for
