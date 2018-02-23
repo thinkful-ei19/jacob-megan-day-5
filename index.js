@@ -10,7 +10,7 @@ const STORE = [
 function generateItemElement(item, itemIndex, template) {
   return `
   <li class="js-item-index-element" data-item-index="${itemIndex}">
-  <span class="shopping-item js-shopping-item ${item.checked ? "shopping-item__checked" : ''}">${item.name}</span>
+  <span class="shopping-item js-shopping-item ${item.checked ? 'shopping-item__checked' : ''}">${item.name}</span>
   <div class="shopping-item-controls">
     <button class="shopping-item-toggle js-item-toggle">
         <span class="button-label">check</span>
@@ -39,8 +39,8 @@ function renderShoppingList() {
 }
   
 function addItemToShoppingList(itemName) {
-    console.log(`Adding "${itemName}" to shopping list`);
-    STORE.push({name: itemName, checked: false});
+  console.log(`Adding "${itemName}" to shopping list`);
+  STORE.push({name: itemName, checked: false});
 }
   
 function handleNewItemSubmit() {
@@ -54,13 +54,31 @@ function handleNewItemSubmit() {
     renderShoppingList();
   });
 }
+
+
+function toggleCheckedForListItem (itemIndex){
+  console.log ('Toggling checked property for item at ' + itemIndex);
+  STORE[itemIndex].checked = !STORE[itemIndex].checked;
+}
   
+
+function getItemIndexFromElement (item){
+  const itemIndexString = $(item).closest('js-item-index-element').attr('data-item-index');
+  return parseInt(itemIndexString, 10);
+}
   
 function handleItemCheckClicked() {
   // this funciton will be reponsible for when users click the "check" button on
   // a shopping list item.
-  console.log('`handleItemCheckClicked` ran');
+  $('.js-shopping-list').on('click','.js-item-toggle', event => 
+    console.log('handleItemCheckClicked ran')
+    const itemIndex = getItemIndexFromElement(event.currentTarget);
+    toggleCheckedForListItem(itemIndex);
+    renderShoppingList();  
+  );
+
 }
+
   
   
 function handleDeleteItemClicked() {
